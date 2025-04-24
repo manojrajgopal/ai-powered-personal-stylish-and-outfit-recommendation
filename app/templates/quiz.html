@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename ='css/quiz.css') }}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Fashion Profile Creation</title>
+    <style>
+        .user-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .user-info .info-field {
+            flex: 1 1 calc(50% - 20px);
+            text-align: center;
+        }
+
+        .user-info .info-field span {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .user-info .info-field {
+                flex: 1 1 100%;
+            }
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons .backBtn,
+        .buttons button,
+        .buttons a {
+            padding: 10px 20px;
+            background-color: hsl(353, 100%, 78%);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .buttons .backBtn:hover,
+        .buttons button:hover,
+        .buttons a:hover {
+            background-color: hsl(0, 100%, 70%);
+        }
+
+        .input-field input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .input-field label {
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>Create Your Style Profile</header>
+        <div class="divider"></div>
+
+        <form action="{{ url_for('quiz') }}" method="POST" enctype="multipart/form-data">
+            <!-- First Page -->
+            <div id="first" class="form active">
+                <div id="user-info" class="user-info">
+                    <div class="info-field">
+                        <span>{{ name }}</span>
+                    </div>
+                    <div class="info-field">
+                        <span>@{{ username }}</span>
+                    </div>
+                    <div class="info-field">
+                        <span>+91 {{ phone }}</span>
+                    </div>
+                    <div class="info-field">
+                        <span>{{ email }}</span>
+                    </div>
+                </div>
+                <div class="divider"></div>
+
+                <div class="details personal">
+                    <span class="title">Personal Preferences</span>
+
+                    <div class="fields">
+                        <!-- Profile Picture -->
+                        <div class="input-field">
+                            <label>Profile Picture</label>
+                            <input type="file" accept="image/*" name="profile_pic" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender</label>
+                            <select name="gender" required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Date of Birth</label>
+                            <input type="date" name="date_of_birth">
+                        </div>
+
+                        <div class="input-field">
+                            <label>Body Type</label>
+                            <select name="body_type">
+                                <option disabled selected>Select body type</option>
+                                <option>Slim</option>
+                                <option>Athletic</option>
+                                <option>Average</option>
+                                <option>Curvy</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Height (cm)</label>
+                            <input name="height" type="number" placeholder="Enter your height" min="50" max="250">
+                        </div>
+
+                        <div class="input-field">
+                            <label>Weight (kg)</label>
+                            <input name="weight" type="number" placeholder="Enter your weight" min="20" max="200">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="nextBtn" onclick="nextForm('second')">
+                        <span class="btnText">Next</span>
+                        <i class="uil uil-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Second Page -->
+            <div id="second" class="form">
+                <div class="details preferences">
+                    <span class="title">Fashion Preferences</span>
+
+                    <div class="fields">
+                        <!-- Preferred Colors -->
+                        <div class="input-field">
+                            <label>Preferred Colors</label>
+                            <div class="tag-container">
+                                <input
+                                    type="text"
+                                    placeholder="Enter your preferred colors"
+                                    list="color-options"
+                                    class="autocomplete"
+                                />
+                            </div>
+                            <input type="hidden" name="preferred_color" id="preferred_color_values" />
+                            <datalist id="color-options">
+                                <option value="Blue"></option>
+                                <option value="Red"></option>
+                                <option value="Green"></option>
+                                <option value="Yellow"></option>
+                                <option value="Orange"></option>
+                                <option value="Navy Blue"></option>
+                                <option value="Black"></option>
+                                <option value="Charcoal"></option>
+                                <option value="Burgundy"></option>
+                                <option value="Maroon"></option>
+                                <option value="Olive"></option>
+                                <option value="Rust"></option>
+                                <option value="Gold"></option>
+                                <option value="Cream"></option>
+                                <option value="Peach"></option>
+                                <option value="Brown"></option>
+                                <option value="Khaki"></option>
+                                <option value="Mustard"></option>
+                                <option value="Teal"></option>
+                                <option value="Tan"></option>
+                                <option value="Beige"></option>
+                                <option value="Bronze"></option>
+                                <option value="Lime Green"></option>
+                                <option value="Off White"></option>
+                                <option value="Sea Green"></option>
+                                <option value="Lavender"></option>
+                                <option value="Mauve"></option>
+                                <option value="Cyan"></option>
+                                <option value="Magenta"></option>
+                                <option value="Pink"></option>
+                                <option value="Turquoise"></option>
+                                <option value="Lavender Blush"></option>
+                                <option value="Indigo"></option>
+                            </datalist>
+                        </div>
+
+                        <!-- Preferred Fabrics -->
+                        <div class="input-field">
+                            <label>Preferred Fabrics</label>
+                            <div class="tag-container">
+                                <input
+                                    type="text"
+                                    placeholder="Enter preferred fabrics"
+                                    list="fabric-options"
+                                    class="autocomplete"
+                                />
+                            </div>
+                            <!-- Hidden input to store the selected fabrics -->
+                            <input type="hidden" name="preferred_fabrics" id="preferred_fabrics" />
+
+                            <datalist id="fabric-options">
+                                <option value="Cotton"></option>
+                                <option value="Silk"></option>
+                                <option value="Denim"></option>
+                                <option value="Wool"></option>
+                                <option value="Polyester"></option>
+                                <option value="Linen"></option>
+                                <option value="Velvet"></option>
+                                <option value="Leather"></option>
+                                <option value="Cashmere"></option>
+                                <option value="Nylon"></option>
+                                <option value="Jersey"></option>
+                                <option value="Tweed"></option>
+                                <option value="Corduroy"></option>
+                                <option value="Chiffon"></option>
+                                <option value="Spandex"></option>
+                                <option value="Brocade"></option>
+                                <option value="Rayon"></option>
+                                <option value="Taffeta"></option>
+                                <option value="Fleece"></option>
+                                <option value="Satin"></option>
+                                <option value="Hemp"></option>
+                                <option value="Tulle"></option>
+                            </datalist>
+                        </div>
+
+                            <!-- Preferred Styles -->
+                        <div class="input-field">
+                            <label>Preferred Styles</label>
+                            <div class="tag-container">
+                                <input
+                                    type="text"
+                                    placeholder="Enter your preferred styles"
+                                    list="style-options"
+                                    class="autocomplete"
+                                />
+                            </div>
+                            <!-- Hidden input to store the selected fabrics -->
+                            <input type="hidden" name="preferred_styles" id="preferred_styles" />
+                            <!-- Datalist with available style options -->
+                            <datalist id="style-options">
+                                <option value="Casual"></option>
+                                <option value="Formal"></option>
+                                <option value="Sporty"></option>
+                                <option value="Business"></option>
+                                <option value="Party"></option>
+                                <option value="Bohemian"></option>
+                                <option value="Vintage"></option>
+                                <option value="Minimalist"></option>
+                                <option value="Streetwear"></option>
+                                <option value="Chic"></option>
+                                <option value="Preppy"></option>
+                                <option value="Punk"></option>
+                                <option value="Rock"></option>
+                                <option value="Gothic"></option>
+                                <option value="Retro"></option>
+                                <option value="Eclectic"></option>
+                                <option value="Athleisure"></option>
+                                <option value="Grunge"></option>
+                                <option value="Luxury"></option>
+                                <option value="Cozy"></option>
+                                <option value="Indie"></option>
+                                <option value="Safari"></option>
+                            </datalist>
+                        </div>
+
+    <!-- Occasion Types -->
+    <div class="input-field">
+        <label>Occasion Types</label>
+        <div class="tag-container">
+            <input
+                type="text"
+                placeholder="Enter occasion types"
+                list="occasion-options"
+                class="autocomplete"
+            />
+        </div>
+        <input type="hidden" name="occasion_types" id="occasion_types" />
+        <datalist id="occasion-options">
+            <option value="Business"></option>
+            <option value="Party"></option>
+            <option value="Wedding"></option>
+            <option value="Casual Outing"></option>
+            <option value="Sports"></option>
+            <option value="Vacation"></option>
+            <option value="Formal Event"></option>
+            <option value="Birthday"></option>
+            <option value="Holiday"></option>
+            <option value="Bridal Shower"></option>
+            <option value="Graduation"></option>
+            <option value="Date Night"></option>
+            <option value="Dinner Party"></option>
+            <option value="Baby Shower"></option>
+            <option value="Anniversary"></option>
+            <option value="Concert"></option>
+            <option value="Festival"></option>
+            <option value="Corporate Event"></option>
+            <option value="Family Gathering"></option>
+            <option value="Outdoor Adventure"></option>
+            <option value="Religious Ceremony"></option>
+        </datalist>
+    </div>
+
+    <!-- Style Goals -->
+    <div class="input-field">
+        <label>Style Goals</label>
+        <div class="tag-container">
+            <input
+                type="text"
+                id="style-goals-input"
+                placeholder="Enter your style goals"
+                list="style-goals-options"
+                autocomplete="off"
+            />
+        </div>
+        <input type="hidden" name="style_goals" id="style_goals" />
+        <datalist id="style-goals-options">
+            <option value="Modern"></option>
+            <option value="Classic"></option>
+            <option value="Edgy"></option>
+            <option value="Bohemian"></option>
+            <option value="Minimalistic"></option>
+            <option value="Eclectic"></option>
+            <option value="Elegant"></option>
+            <option value="Trendy"></option>
+            <option value="Vintage"></option>
+            <option value="Chic"></option>
+            <option value="Sporty"></option>
+            <option value="Sophisticated"></option>
+            <option value="Romantic"></option>
+            <option value="Luxury"></option>
+            <option value="Bold"></option>
+            <option value="Timeless"></option>
+            <option value="Casual"></option>
+            <option value="Professional"></option>
+            <option value="Glamorous"></option>
+            <option value="Relaxed"></option>
+        </datalist>
+    </div>
+                        
+
+                        <div class="input-field">
+                            <label>Budget Preferences</label>
+                            <input 
+                                type="number" 
+                                name="budget" 
+                                placeholder="Preferred price range"
+                                min="0" 
+                                max="1000000" 
+                                step="1"
+                                class="budget-input" 
+                            />
+                            <small>Enter your preferred budget in USD</small>
+                        </div>
+                        
+
+                        <!-- Skin Color -->
+                        <div class="input-field">
+                            <label>Skin Color</label>
+                            <select name="skin_color">
+                                <option disabled selected>Select skin color</option>
+                                <option>Deepest Skin</option>
+                                <option>Very Deep</option>
+                                <option>Deep Brown</option>
+                                <option>Medium Brown</option>
+                                <option>Tan</option>
+                                <option>Light Tan</option>
+                                <option>Medium Fair</option>
+                                <option>Light Fair</option>
+                                <option>Warm Fair</option>
+                                <option>Very Fair</option>
+                                <option>Pale</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Virtual Try-On Picture</label>
+                            <input type="file" accept="image/*" name="virtual-try-on" required>
+                        </div>
+
+                        <!-- Wardrobe Image -->
+                        <div class="input-field">
+                            <label>Wardrobe Image</label>
+                            <input name="wardrobe_img" type="file" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="backBtn" onclick="prevForm('first')">
+                        <i class="uil uil-arrow-left"></i>
+                        <span class="btnText">Back</span>
+                    </button>
+                    <button type="submit" class="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-check"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nextForm(formId) {
+            document.querySelector('.form.active').classList.remove('active');
+            document.getElementById(formId).classList.add('active');
+        }
+
+        function prevForm(formId) {
+            document.querySelector('.form.active').classList.remove('active');
+            document.getElementById(formId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
+<style>
+    .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        border: 1px solid #aaa;
+        padding: 3px;
+        min-height: 30px;
+        align-items: center;
+        border-radius: 5px;
+    }
+
+    .tag {
+        background: hsl(353, 100%, 78%);
+        color: white;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+    }
+
+    .tag span {
+        margin-left: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .tag-container input {
+        border: none;
+        outline: none;
+        flex: 1;
+        padding: 3px;
+        min-width: 50px;
+        height: 20px;
+        font-size: 12px;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const inputs = document.querySelectorAll('input[type="text"]');
+    
+    inputs.forEach(input => {
+        const tagContainer = input.closest(".input-field").querySelector(".tag-container");
+        const datalist = input.closest(".input-field").querySelector("datalist");
+        const selectedValues = new Set();
+        const hiddenInput = input.closest(".input-field").querySelector("input[type='hidden']");
+
+        input.addEventListener("input", function (event) {
+            let value = event.target.value.trim();
+
+            if (value.includes(",")) {
+                let values = value.split(",").map(item => item.trim()).filter(item => item !== "");
+
+                values.forEach(item => {
+                    if (!selectedValues.has(item)) {
+                        selectedValues.add(item);
+                        addTag(item);
+                    }
+                });
+
+                input.value = ""; // Clear input after adding
+            }
+        });
+
+        input.addEventListener("change", function () {
+            let value = input.value.trim();
+
+            if (value && !selectedValues.has(value)) {
+                selectedValues.add(value);
+                addTag(value);
+            }
+
+            input.value = ""; // Clear input after adding
+        });
+
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === ",") {
+                event.preventDefault();
+                let value = input.value.trim();
+
+                if (value && !selectedValues.has(value)) {
+                    selectedValues.add(value);
+                    addTag(value);
+                }
+
+                input.value = ""; // Clear input after adding
+            }
+        });
+
+        function addTag(text) {
+            const tag = document.createElement("div");
+            tag.classList.add("tag");
+            tag.textContent = text;
+
+            const removeBtn = document.createElement("span");
+            removeBtn.textContent = " ×";
+            removeBtn.addEventListener("click", () => {
+                selectedValues.delete(text);
+                tag.remove();
+                updateHiddenInput(); // Update hidden input after removal
+            });
+
+            tag.appendChild(removeBtn);
+            tagContainer.insertBefore(tag, input);
+            updateHiddenInput(); // Update hidden input after adding
+        }
+
+        function updateHiddenInput() {
+            hiddenInput.value = Array.from(selectedValues).join(", ");
+        }
+
+        // Make sure hidden input value is updated on page load
+        updateHiddenInput();
+    });
+});
+
+</script>

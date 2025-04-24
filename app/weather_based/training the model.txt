@@ -1,0 +1,17 @@
+Model Training and Evaluation
+
+When you run `train.py`, it generates the trained model files: `image_features.pkl` and `processed_data.pkl`.  
+  
+📌 To run the script, navigate to the `weather_based` directory:
+bash
+cd weather_based
+python training/train.py
+
+📌 To test the model
+bash
+python -m testing.test
+
+📌 For visualization, you can execute the evaluation script:
+
+bash
+python evaluation.py

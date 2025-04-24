@@ -54,12 +54,10 @@ def filter_products(fashion_data, extracted_keywords):
 
 def recommend_outfits(user_query):
     """Processes user query and recommends outfits."""
-    print("Processing request...")
     parquet_folder = r"data/fashion-dataset/parquet/"
     fashion_data = load_fashion_data(parquet_folder)
     
     extracted_keywords = extract_keywords(user_query)
-    print("Extracted Keywords:", extracted_keywords)
     
     if not extracted_keywords:
         print("\nNo valid attributes found in query. Please provide more details.")

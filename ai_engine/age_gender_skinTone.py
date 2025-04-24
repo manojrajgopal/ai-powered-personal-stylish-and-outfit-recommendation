@@ -84,7 +84,6 @@ def detect_age_gender_opencv(image_path):
         dnn_gen.setInput(blob)
         genderPreds = dnn_gen.forward()
         gender = gender_list[genderPreds[0].argmax()]
-        print(f"Detected Gender: {gender}")
 
         # Age Prediction
         dnn_age.setInput(blob)
@@ -92,7 +91,6 @@ def detect_age_gender_opencv(image_path):
 
         # Get accurate numerical age
         estimated_age = get_precise_age(agePreds)
-        print(f"Estimated Age: {estimated_age}")
 
         # Determine gender category based on estimated age
         if gender == 'Male':
@@ -279,10 +277,6 @@ def process_fashion_recommendation(image_path):
     gender_category, detected_age = detect_age_gender_opencv(image_path)
     detected_tone_hex, recommended_colors = detector.generate(image_path)
     if detected_tone_hex:
-        print(f"Detected Skin Tone: {detected_tone_hex}")
-        print(f"Recommended Colors: {recommended_colors}")
-        print(f"Detected Gender and Age Category: {gender_category, detected_age}")
-
         outfit_generator = OutfitGenerator(data)
         outfits = outfit_generator.generate_outfits(recommended_colors, gender_category)
         display_outfits(outfits)

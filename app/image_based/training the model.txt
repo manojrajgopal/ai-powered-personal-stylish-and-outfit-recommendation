@@ -1,0 +1,1 @@
+When you run `app.py`, it generates the trained model files: `embeddings.pkl` and `filenames.pkl`.    📌 To run the script, navigate to the `image_based` directory:bashcd image_basedpython app.py

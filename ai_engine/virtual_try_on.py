@@ -76,8 +76,6 @@ async def process_images(username, vton_img_path, garm_img_path, output_img_one,
     return False  # If all APIs fail
 
 def run_virtual_try_on(username, vton_img_path, garm_img_path):
-    print("****************************************************************")
-    print(f"Processing images for {username}: {vton_img_path}, {garm_img_path}")
     if not (allowed_file(vton_img_path) and allowed_file(garm_img_path)):
         return "Invalid file format. Only PNG, JPG, JPEG, and WEBP are allowed."
 
@@ -95,5 +93,4 @@ def run_virtual_try_on(username, vton_img_path, garm_img_path):
 
     success = asyncio.run(process_images(username, vton_img_path, garm_img_path, output_img_one, output_img_two))
 
-    print(f"Processing {'successful' if success else 'failed'}. Output: {output_img_one}, {output_img_two}")
     return True if success else False, output_img_one, output_img_two

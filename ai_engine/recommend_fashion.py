@@ -19,7 +19,6 @@ from keras.layers import GlobalMaxPooling2D
 
 # Set dataset path
 DATASET_PATH = "D:/Python/personal stylish/data/fashion-dataset/"
-print(os.listdir(DATASET_PATH))
 
 # Load dataset
 df = pd.read_csv(DATASET_PATH + "styles.csv", nrows=5000)

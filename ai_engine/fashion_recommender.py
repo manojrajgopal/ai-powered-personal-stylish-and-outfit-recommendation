@@ -30,9 +30,6 @@ class FashionRecommender:
     def get_filtered_data(self, filters):
         df_filtered = self.df_merged.copy()
 
-        print("Data before applying filters:")
-        print(df_filtered.head())
-
         def apply_conditions(df, conditions):
             """Helper function to apply conditions to the DataFrame."""
             if conditions:
@@ -73,50 +70,39 @@ class FashionRecommender:
             return conditions
 
         # Stage 1: Apply all user-specified filters (highest priority)
-        print("Stage 1: Applying all user-specified filters...")
         stage1_conditions = create_conditions(df_filtered, filters, filters.keys())
         stage1_results = apply_conditions(df_filtered, stage1_conditions)
 
         if not stage1_results.empty:
-            print("Results found with all filters applied.")
             df_filtered = stage1_results
         else:
             # Stage 2: Relax filters - search for gender, baseColour, and preferredStyles
-            print("Stage 2: Relaxing filters - searching for gender, baseColour, and preferredStyles...")
             stage2_keys = ['gender', 'baseColour', 'preferredStyles']
             stage2_conditions = create_conditions(self.df_merged, filters, stage2_keys)
             stage2_results = apply_conditions(self.df_merged, stage2_conditions)
 
             if not stage2_results.empty:
-                print("Results found with gender, baseColour, and preferredStyles filters applied.")
                 df_filtered = stage2_results
             else:
                 # Stage 3: Relax further - search for gender and baseColour only
-                print("Stage 3: Relaxing further - searching for gender and baseColour...")
                 stage3_keys = ['gender', 'baseColour']
                 stage3_conditions = create_conditions(self.df_merged, filters, stage3_keys)
                 stage3_results = apply_conditions(self.df_merged, stage3_conditions)
 
                 if not stage3_results.empty:
-                    print("Results found with gender and baseColour filters applied.")
                     df_filtered = stage3_results
                 else:
                     # Stage 4: Fallback - search for gender only
-                    print("Stage 4: Fallback - searching for gender only...")
                     stage4_keys = ['gender']
                     stage4_conditions = create_conditions(self.df_merged, filters, stage4_keys)
                     stage4_results = apply_conditions(self.df_merged, stage4_conditions)
 
                     if not stage4_results.empty:
-                        print("Results found with gender filter applied.")
                         df_filtered = stage4_results
                     else:
                         # Stage 5: Final fallback - return random outfits
-                        print("Stage 5: No matches found. Returning random outfits...")
+                        print("No matching products found. Returning random outfits.")
                         df_filtered = self.df_merged.sample(n=min(10, len(self.df_merged)), random_state=42)
-
-        print("Data after applying filters:")
-        print(df_filtered.head())
 
         return df_filtered
 
@@ -167,9 +153,6 @@ def recommend_fashion(gender=None, baseColour=None, preferredFabrics=None, prefe
         'styleGoals': styleGoals if styleGoals and styleGoals != [''] else None,
         'bodyType': bodyType if bodyType else None
     }
-
-
-    print(f"Filters being applied: {filters}")
 
     # Initialize FashionRecommender with the file paths for styles and images
     recommender = FashionRecommender('data/fashion-dataset/styles.csv', 'data/fashion-dataset/images.csv')

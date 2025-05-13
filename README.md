@@ -1,4 +1,4 @@
-# ai-powered-personal-stylish-and-outfit-recommendation
+# Ai-Powered Personal Stylish and Outfit Recommendation
 
 ## 1. User Profile and Preferences 
 • Profile Creation: Allow users to create a profile with 

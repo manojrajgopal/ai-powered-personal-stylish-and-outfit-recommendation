@@ -1,4 +1,4 @@
-![Screenshot (99)](https://github.com/user-attachments/assets/f14c77a2-d7da-4922-8655-9eaf4988b4c1)# ai-powered-personal-stylish-and-outfit-recommendation
+# ai-powered-personal-stylish-and-outfit-recommendation
 
 ## 1. User Profile and Preferences 
 • Profile Creation: Allow users to create a profile with 
@@ -83,8 +83,9 @@ items
 3. Style Quiz Page to Capture User Preferences
 4. Profile Page Displaying User Information and Recommended Outfits
 
-#ScreenShots
-SignIn ![Screenshot (106)](https://github.com/user-attachments/assets/ff69b191-4707-44af-ba0f-bccd3d41c9a2)
+## ScreenShots
+![Screenshot (106)](https://github.com/user-attachments/assets/ff69b191-4707-44af-ba0f-bccd3d41c9a2)
+<p align="center"> ### SignIn </p>
 SignUp ![Screenshot (107)](https://github.com/user-attachments/assets/ae18accc-2bfe-4cb2-9254-6d9d064a57a1)
 Dashboard 1. ![Screenshot (99)](https://github.com/user-attachments/assets/cb3728f4-6e60-445c-a8c7-1f195af5c802)
 Dashboard 2. ![Screenshot (100)](https://github.com/user-attachments/assets/62aa25eb-f8bb-4327-b142-327caf07b1aa)

@@ -121,7 +121,7 @@ items
 <p align="center" style="font-size: 48px;"> User about page </p>
 
 ![Screenshot (110)](https://github.com/user-attachments/assets/8331b7e0-ccd8-4980-b780-3b6439572279)
-<p align="center" style="font-size: 48px;"> Personalized Outfit Colors Based on Skin Tone ![Screenshot </p>
+<p align="center" style="font-size: 48px;"> Personalized Outfit Colors Based on Skin Tone </p>
 
 ![Screenshot (113)](https://github.com/user-attachments/assets/08d60beb-1d72-4422-ae17-135dfa1a9e14)
 <p align="center" style="font-size: 48px;"> Wardrobe Image-Based Recommendation </p>

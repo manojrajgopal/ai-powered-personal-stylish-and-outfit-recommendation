@@ -37,7 +37,7 @@ os.environ["GRPC_LOG_SEVERITY_LEVEL"] = "ERROR"
 logging.getLogger('google.generativeai').setLevel(logging.CRITICAL)
 logging.getLogger('grpc').setLevel(logging.CRITICAL)
 
-API_KEY = "" # Replace with your API key
+API_KEY = os.getenv('G_API_KEY') # Replace with your API key
 
 if API_KEY is None:
     raise ValueError("API_KEY environment variable is not set!")
@@ -57,7 +57,7 @@ app.config['SECRET_KEY'] = 'manojrajgopal'
 db_initializer = DatabaseInitializer()
 db_initializer.initialize_database()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/fashion'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/fashion'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -124,7 +124,7 @@ class Login:
     def get_location_manual(self, lat, lon):
         try:
             # Fetch city using OpenWeatherMap Geocoding API
-            OPENWEATHERMAP_API_KEY = "78542c411a2b9031ae9cb9bef906dc2f"
+            OPENWEATHERMAP_API_KEY = "" # Replace with your API key
             geo_url = f"http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit=1&appid={OPENWEATHERMAP_API_KEY}"
             geo_response = requests.get(geo_url).json()
 

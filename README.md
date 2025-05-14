@@ -121,7 +121,7 @@ items
 <p align="center" style="font-size: 48px;"> User about page </p>
 
 ![Screenshot (110)](https://github.com/user-attachments/assets/8331b7e0-ccd8-4980-b780-3b6439572279)
-<p align="center" style="font-size: 48px;"> Personalized Outfit Colors Based on Skin Tone </p>
+<p align="center" style="font-size: 48px;"> Personalized Outfit Based on Skin Tone </p>
 
 ![Screenshot (113)](https://github.com/user-attachments/assets/08d60beb-1d72-4422-ae17-135dfa1a9e14)
 <p align="center" style="font-size: 48px;"> Wardrobe Image-Based Recommendation </p>
@@ -147,3 +147,138 @@ items
 
 
 
+# 🚀 How to Run This Project
+
+1. Navigate to the project directory:
+
+    cd ai-powered-personal-stylish-and-outfit-recommendation/
+
+2. Prepare the datasets and models:
+    You have two options:
+        Download the pre-trained models and datasets.
+        Train the models yourself.
+    The following directories contain the necessary components:
+    - age_gender-dataset/
+    - fashion_recommend/    
+    - fashion-dataset/
+    - image_based/
+    - occasion/
+    - weather_based/
+    📄 Each folder includes a text file with detailed instructions on what files are needed, where to place them, and how to set them up. Please refer to those files for proper configuration.
+
+3. Install dependencies:
+    Make sure all required packages are installed:
+        pip install -r requirements.txt
+
+4. Update database configuration:
+    Modify the database credentials in the following files:
+        app/main.py → Line 60
+            Locate the connection string:
+                mysql://username:password@host:port/fashion
+
+            Replace username, password, host, and port with your actual MySQL credentials.
+            
+            Do not change the database name (fashion) — it will be created automatically by the program.
+
+        app/database.py → Line 4
+            Update the constructor parameters in the __init__ method:
+                def __init__(self, host='localhost', user='your_username', password='your_password', database='fashion'):
+
+            Replace 'your_username' and 'your_password' with your actual MySQL username and password.
+
+5. Set up Gemini API (Custom Search)
+    This project uses the Gemini Custom Search API. You'll need two credentials:
+        G_API_KEY: Your Gemini API key
+        G_CX: Your Custom Search Engine ID (CX)
+    
+    📍 Where to use them:
+    In app/main.py → Line 40, the API key is accessed like this:
+        API_KEY = os.getenv('G_API_KEY')  # Recommended for security
+
+    While you can hardcode the key (e.g., API_KEY = "your_api_key"), using environment variables is strongly recommended for better security.
+
+    ✅ How to set environment variables from the command line:
+
+    On Windows (Command Prompt):
+        set G_API_KEY = "your_actual_api_key"
+        set G_CX = "your_actual_cx_value"
+
+    On macOS/Linux (Bash/Zsh):
+        export G_API_KEY=your_actual_api_key
+        export G_CX=your_actual_cx_value
+
+    These variables will be available during the session and accessed in your code via os.getenv().
+
+6. Set Up Hugging Face API for Virtual Try-On
+
+    This project uses Hugging Face’s Inference API to generate virtual try-on clothing images.
+
+    🔗 https://huggingface.co/settings/tokens
+
+    To avoid failures due to rate limits, you can use multiple API keys (e.g., from different accounts).
+
+    In ai_engine/virtual_try_on.py → Line 10, update the api_tokens list:
+
+        Option 1 (Direct):
+            api_tokens = ["your_api_key_1", "your_api_key_2"]
+
+        Option 2 (Using environment variables – recommended):
+            Set in terminal:
+                set HF_ONE_API = "Your API KEY"
+                set HF_TWO_API = "Your API KEY"
+
+            Update code:
+                api_tokens = [os.getenv("HF_ONE_API"), os.getenv("HF_TWO_API")]
+            
+        One key is enough to start, but multiple keys improve reliability.
+
+7. Set Up Weather API (OpenWeatherMap)
+
+    This project uses the OpenWeatherMap API to detect the current weather based on your location.
+
+    🔗 https://home.openweathermap.org/api_keys
+
+    In the file app/main.py, update the following lines:
+        Line 104
+        Line 127
+    Replace:
+        OPENWEATHERMAP_API_KEY = ""  # Replace with your API key
+    With:
+        OPENWEATHERMAP_API_KEY = "your_api_key"
+
+    This API is used to detect the user's current weather conditions, which helps personalize outfit recommendations.
+
+    ✅ Only one API key is needed.
+
+8. Run the Project
+    Once all setup steps are complete, start the application by running:
+        python run.py
+
+    The application will start locally and provide two links:
+        A local URL (accessible only from your machine)
+        An external URL (via NGROK, accessible from any device connected to the internet)
+    
+    🌐 Make Your App Public with NGROK
+    To allow others to access your app online, you can use NGROK — a tunneling service that exposes your local server to the internet.
+
+    🔗 Download NGROK https://dashboard.ngrok.com/get-started/setup/windows
+    
+    🛠️ Setup Instructions:
+        1. Move the downloaded NGROK executable to a convenient location (e.g., C:\ngrok or inside your project directory).
+
+        2. Open NGROK in a terminal (double-click or use command line).
+
+        3. Run the following command (replace 5000 with your actual port if different):
+            ngrok http 5000 
+        4. NGROK will generate a public URL (e.g., https://your-app.ngrok.io).
+            Share this link — anyone can visit your application from anywhere.
+
+    🔒 Optional: Set a Static Domain
+        To keep your NGROK URL unchanged in the future:
+        Visit the "Deploy Your App" section on NGROK's dashboard.
+        Set up a static domain for consistent access.
+
+9. Stop the Project
+    To terminate the running application, press:
+        Ctrl + C
+    This will stop the server and end the process.

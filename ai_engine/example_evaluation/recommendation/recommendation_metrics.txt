@@ -1,0 +1,4 @@
+Average Precision@10: 0.4000
+Average Recall@10: 0.8889
+Average F1@10: 0.5476
+Average NDCG@10: 0.7440

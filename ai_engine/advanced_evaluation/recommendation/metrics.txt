@@ -1,0 +1,4 @@
+precision@k: 0.3333
+recall@k: 0.5000
+ndcg@k: 0.6131
+diversity: 0.2495

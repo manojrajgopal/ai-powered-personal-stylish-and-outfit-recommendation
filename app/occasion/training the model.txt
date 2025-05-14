@@ -1,13 +1,1 @@
-Model Training and Evaluation
-
-When you run `train.py`, it generates the trained model files: `metadata.pkl` and `features.npy`.  
-  
-📌 To run the script, navigate to the `occasion` directory:
-bash
-cd occasion
-python train.py
-
-📌 For visualization, you can execute the evaluation script:
-
-bash
-python run_evaluation.py
+Model Training and Evaluation## Method 1When you run `train.py`, it generates the trained model files: `metadata.pkl` and `features.npy`.    📌 To run the script, navigate to the `occasion` directory:bash	cd occasion	python train.py## Method 2📌 Alternatively, you can use the pre-trained model files (which I have already trained).🔗 https://drive.google.com/drive/folders/14JeHDx9djtOjsjQh4EtWFpOZXP4579Tn?usp=sharingDownload the pre-trained model files and place them in the occasion directory: cd occasion📌 For visualization, you can execute the evaluation script:bashpython run_evaluation.py
